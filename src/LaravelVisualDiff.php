@@ -9,6 +9,5 @@ class LaravelVisualDiff
      */
     public function visualDiff(?string $name)
     {
-
     }
 }

@@ -12,7 +12,7 @@ class LaravelVisualDiffServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Browser::macro('visualDiff', function(?string $name = null) {
+        Browser::macro('visualDiff', function (?string $name = null) {
             return app(LaravelVisualDiff::class)
                 ->visualDiff($name);
         });
