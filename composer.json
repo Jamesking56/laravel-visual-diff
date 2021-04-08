@@ -1,0 +1,54 @@
+{
+    "name": "jamesking56/laravel-visual-diff",
+    "description": "Visual Testing using Laravel Dusk",
+    "keywords": [
+        "jamesking56",
+        "laravel-visual-diff"
+    ],
+    "homepage": "https://github.com/jamesking56/laravel-visual-diff",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "James King",
+            "email": "james@jamesking.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0",
+        "laravel/dusk": "^6.10"
+    },
+    "require-dev": {
+        "orchestra/testbench-dusk": "^6.17",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jamesking56\\LaravelVisualDiff\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jamesking56\\LaravelVisualDiff\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jamesking56\\LaravelVisualDiff\\LaravelVisualDiffServiceProvider"
+            ],
+            "aliases": {
+                "LaravelVisualDiff": "Jamesking56\\LaravelVisualDiff\\LaravelVisualDiffFacade"
+            }
+        }
+    }
+}
