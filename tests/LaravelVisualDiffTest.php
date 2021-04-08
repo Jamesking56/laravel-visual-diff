@@ -5,9 +5,9 @@ namespace Jamesking56\LaravelVisualDiff\Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Jamesking56\LaravelVisualDiff\LaravelVisualDiffServiceProvider;
 use Laravel\Dusk\Browser;
 use Orchestra\Testbench\Dusk\TestCase;
-use Jamesking56\LaravelVisualDiff\LaravelVisualDiffServiceProvider;
 use PHPUnit\Framework\ExpectationFailedException;
 
 class LaravelVisualDiffTest extends TestCase
@@ -35,12 +35,12 @@ class LaravelVisualDiffTest extends TestCase
 
     protected function tearDown(): void
     {
-        rmdir(__DIR__ . '/visual-diff');
+        rmdir(__DIR__.'/visual-diff');
     }
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['router']->get('page', function() {
+        $app['router']->get('page', function () {
             return 'This is my page.';
         });
     }
@@ -52,7 +52,7 @@ class LaravelVisualDiffTest extends TestCase
                 ->visualDiff();
         });
 
-        $this->assertTrue(file_exists(__DIR__ . '/visual-diff/screenshots/1920_x_1080_testFirstRunNewScreenshot_page.png'));
+        $this->assertTrue(file_exists(__DIR__.'/visual-diff/screenshots/1920_x_1080_testFirstRunNewScreenshot_page.png'));
     }
 
     public function testFirstRunNewScreenshotNamed(): void
@@ -62,7 +62,7 @@ class LaravelVisualDiffTest extends TestCase
                 ->visualDiff('the_name_goes_here');
         });
 
-        $this->assertTrue(file_exists(__DIR__ . '/visual-diff/screenshots/1920_x_1080_the_name_goes_here_page.png'));
+        $this->assertTrue(file_exists(__DIR__.'/visual-diff/screenshots/1920_x_1080_the_name_goes_here_page.png'));
     }
 
     public function testSecondRunScreenshotNoDifferenceDetected(): void
@@ -72,7 +72,7 @@ class LaravelVisualDiffTest extends TestCase
             $browser->visit('page')
                 ->visualDiff();
         });
-        $this->assertTrue(file_exists(__DIR__ . '/visual-diff/screenshots/1920_x_1080_testSecondRunScreenshotDiff_page.png'));
+        $this->assertTrue(file_exists(__DIR__.'/visual-diff/screenshots/1920_x_1080_testSecondRunScreenshotDiff_page.png'));
 
         // Second run of same page
         $this->browse(function (Browser $browser) {
@@ -81,13 +81,13 @@ class LaravelVisualDiffTest extends TestCase
         });
 
         // No diff file generated since we didn't hit the threshold
-        $this->assertFalse(file_exists(__DIR__ . '/visual-diff/diffs/1920_x_1080_testSecondRunScreenshotDiff_page.png'));
+        $this->assertFalse(file_exists(__DIR__.'/visual-diff/diffs/1920_x_1080_testSecondRunScreenshotDiff_page.png'));
     }
 
     public function testSecondRunScreenshotDifferenceDetected(): void
     {
         // Fake first run with a dummy png file which should then generate a massive difference
-        copy(__DIR__ . '/dummy.png', __DIR__ . '/visual-diff/screenshots/1920_x_1080_testSecondRunScreenshotDifferenceDetected_page.png');
+        copy(__DIR__.'/dummy.png', __DIR__.'/visual-diff/screenshots/1920_x_1080_testSecondRunScreenshotDifferenceDetected_page.png');
 
         // Second run of page, massive difference should be detected
         try {
@@ -103,6 +103,6 @@ class LaravelVisualDiffTest extends TestCase
         }
 
         // Diff file is generated so the developer can see the difference
-        $this->assertFalse(file_exists(__DIR__ . '/visual-diff/diffs/1920_x_1080_testSecondRunScreenshotDifferenceDetected_page.png'));
+        $this->assertFalse(file_exists(__DIR__.'/visual-diff/diffs/1920_x_1080_testSecondRunScreenshotDifferenceDetected_page.png'));
     }
 }
